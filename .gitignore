@@ -11,3 +11,4 @@
 *.class
 Documentation/
 node_modules/
+Keyboard.h
