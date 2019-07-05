@@ -11,11 +11,11 @@
 
 # Run "make help" for target help.
 
-MCU          = atmega32u4
-ARCH         = AVR8
+MCU          ?= atmega32u4
+ARCH         ?= AVR8
 BOARD        = QMK
-F_CPU        = 16000000
-F_USB        = $(F_CPU)
+F_CPU        ?= 16000000
+F_USB        ?= $(F_CPU)
 OPTIMIZATION = s
 TARGET       = BootloaderDFU
 SRC          = $(TARGET).c Descriptors.c BootloaderAPI.c BootloaderAPITable.S $(LUFA_SRC_USB)
@@ -27,8 +27,8 @@ LTO          = Y
 # Flash size and bootloader section sizes of the target, in KB. These must
 # match the target's total FLASH size and the bootloader size set in the
 # device's fuses.
-FLASH_SIZE_KB         = 32
-BOOT_SECTION_SIZE_KB  = 4
+FLASH_SIZE_KB         ?= 32
+BOOT_SECTION_SIZE_KB  ?= 4
 
 # Bootloader address calculation formulas
 # Do not modify these macros, but rather modify the dependent values above.
