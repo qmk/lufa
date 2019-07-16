@@ -11,5 +11,5 @@
 *.class
 Documentation/
 node_modules/
-Keyboard.h
+Bootloaders/DFU/Keyboard.h
 .vscode/ipch/
