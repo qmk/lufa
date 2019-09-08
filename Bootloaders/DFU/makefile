@@ -11,7 +11,6 @@
 
 # Run "make help" for target help.
 
-LTO			 = Y
 MCU          ?= atmega32u4
 ARCH         ?= AVR8
 BOARD        = QMK
@@ -23,6 +22,7 @@ SRC          = $(TARGET).c Descriptors.c BootloaderAPI.c BootloaderAPITable.S $(
 LUFA_PATH    = ../../LUFA
 CC_FLAGS     = -DUSE_LUFA_CONFIG_HEADER -IConfig/ -DBOOT_START_ADDR=$(BOOT_START_OFFSET)
 LD_FLAGS     = -Wl,--section-start=.text=$(BOOT_START_OFFSET) $(BOOT_API_LD_FLAGS)
+LTO			 = Y
 
 # Flash size and bootloader section sizes of the target, in KB. These must
 # match the target's total FLASH size and the bootloader size set in the
