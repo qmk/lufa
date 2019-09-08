@@ -11,6 +11,7 @@
 
 # Run "make help" for target help.
 
+LTO			 = Y
 MCU          ?= atmega32u4
 ARCH         ?= AVR8
 BOARD        = QMK
