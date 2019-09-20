@@ -22,6 +22,7 @@ SRC          = $(TARGET).c Descriptors.c BootloaderAPI.c BootloaderAPITable.S Li
 LUFA_PATH    = ../../LUFA
 CC_FLAGS     = -DUSE_LUFA_CONFIG_HEADER -IConfig/ -DBOOT_START_ADDR=$(BOOT_START_OFFSET)
 LD_FLAGS     = -Wl,--section-start=.text=$(BOOT_START_OFFSET) $(BOOT_API_LD_FLAGS)
+LTO          = Y
 
 # Flash size and bootloader section sizes of the target, in KB. These must
 # match the target's total FLASH size and the bootloader size set in the
@@ -43,12 +44,12 @@ BOOT_API_LD_FLAGS    += $(call BOOT_SECTION_LD_FLAG, .apitable_jumptable,   Boot
 BOOT_API_LD_FLAGS    += $(call BOOT_SECTION_LD_FLAG, .apitable_signatures,  BootloaderAPI_Signatures,  8)
 
 # Check if the bootloader needs an AUX section, located before the real bootloader section to store some of the
-# bootloader code. This is required for 32KB and smaller devices, where the actual bootloader is 6KB but the maximum
+# bootloader code. This is required for 32KB and smaller devices, where the actual bootloader is 8KB but the maximum
 # bootloader section size is 4KB. The actual usable application space will be reduced by 6KB for these devices.
 ifeq ($(BOOT_SECTION_SIZE_KB),8)
   CC_FLAGS           += -DAUX_BOOT_SECTION_SIZE=0
 else
-  AUX_BOOT_SECTION_SIZE_KB = (6 - $(BOOT_SECTION_SIZE_KB))
+  AUX_BOOT_SECTION_SIZE_KB = (8 - $(BOOT_SECTION_SIZE_KB))
 
   CC_FLAGS           += -DAUX_BOOT_SECTION_SIZE='($(AUX_BOOT_SECTION_SIZE_KB) * 1024)'
   LD_FLAGS           += -Wl,--section-start=.boot_aux=$(call BOOT_SEC_OFFSET, (($(BOOT_SECTION_SIZE_KB) + $(AUX_BOOT_SECTION_SIZE_KB)) * 1024 - 16))
