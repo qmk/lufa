@@ -136,6 +136,9 @@ ifeq ($(LTO), Y)
    BASE_CC_FLAGS += -flto -fuse-linker-plugin
    BASE_LD_FLAGS += -flto -fuse-linker-plugin
 endif
+ifneq ($(OPT_DEFS),)
+   BASE_CC_FLAGS += $(OPT_DEFS)
+endif
 
 # Additional language specific compiler flags
 BASE_C_FLAGS   := -x c -O$(OPTIMIZATION) -std=$(C_STANDARD) -Wstrict-prototypes

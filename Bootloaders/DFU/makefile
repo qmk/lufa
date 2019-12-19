@@ -43,6 +43,10 @@ BOOT_API_LD_FLAGS     = $(call BOOT_SECTION_LD_FLAG, .apitable_trampolines, Boot
 BOOT_API_LD_FLAGS    += $(call BOOT_SECTION_LD_FLAG, .apitable_jumptable,   BootloaderAPI_JumpTable,   32)
 BOOT_API_LD_FLAGS    += $(call BOOT_SECTION_LD_FLAG, .apitable_signatures,  BootloaderAPI_Signatures,  8)
 
+ifeq ($(strip $(CHECK_RESET_SOURCE)), yes)
+    OPT_DEFS += -DCHECK_RESET_SOURCE
+endif
+
 # Default target
 all:
 
