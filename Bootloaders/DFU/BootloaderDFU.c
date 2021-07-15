@@ -198,6 +198,11 @@ int main(void)
 	  #if (BOARD == BOARD_QMK)
 	  	bool pressed = (PIN(QMK_ESC_INPUT) & NUM(QMK_ESC_INPUT));
 		if ((DFU_State == dfuIDLE) && (keypress > 5000) && pressed) {
+			while (PIN(QMK_ESC_INPUT) & NUM(QMK_ESC_INPUT)){
+				// Wait for key to be released
+				_delay_ms(10);
+			}
+			
 			break;
 		}
 		if (pressed) {
